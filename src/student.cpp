@@ -67,6 +67,12 @@ using namespace std;
 //     preorder(&satu);      // mencetak:  42
 // =============================================================================
 void preorder(const Node* root) {
+    if (root != nullptr)
+    {
+        cout << root->data << " ";
+        preorder(root->left);
+        preorder(root->right);
+    }
 }
 
 // =============================================================================
@@ -89,7 +95,13 @@ void preorder(const Node* root) {
 //
 //     inorder(NULL);     // tidak mencetak apa pun
 // =============================================================================
-void inorder(const Node* root) {
+void inorder(const Node* root){
+    if (root != nullptr)
+    {
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
+    }
 }
 
 // =============================================================================
@@ -113,7 +125,13 @@ void inorder(const Node* root) {
 //
 //     postorder(NULL);   // tidak mencetak apa pun
 // =============================================================================
-void postorder(const Node* root) {
+void postorder(const Node* root){
+    if (root != nullptr)
+    {
+        postorder(root->left);
+        postorder(root->right);
+        cout << root->data << " ";
+    }
 }
 
 // =============================================================================
@@ -140,6 +158,12 @@ void postorder(const Node* root) {
 //     clear(root);              // aman, tidak terjadi apa-apa
 // =============================================================================
 void clear(Node*& root) {
+    if (root == nullptr) return;
+
+    clear(root->left);
+    clear(root->right);
+    delete root;
+    root = nullptr;
 }
 
 // =============================================================================
@@ -177,7 +201,12 @@ void clear(Node*& root) {
 //     3                           masih punya satu cabang)
 // =============================================================================
 int jumlahDaun(const Node* root) {
-    return 0;
+    if (root == NULL) return 0;
+
+    if (root->left == NULL && root->right == NULL) return 1;
+
+    return jumlahDaun(root->left) + jumlahDaun(root->right);
+
 }
 
 // =============================================================================
